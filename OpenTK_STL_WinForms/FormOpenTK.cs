@@ -34,7 +34,7 @@ namespace OpenTK_STL_WinForms
 
         private void miExit_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Вы уверены, что хотите выйти из программы ?", "Выход", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to exit the program ?", "Exit", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Application.Exit();
             }
@@ -42,7 +42,7 @@ namespace OpenTK_STL_WinForms
 
         private void miAbout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("kartoshka.antoschcka@yandex.ru", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("kartoshka.antoschcka@yandex.ru", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void glControl_Load(object sender, EventArgs e)

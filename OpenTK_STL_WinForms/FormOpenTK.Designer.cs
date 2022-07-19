@@ -63,26 +63,26 @@ namespace OpenTK_STL_WinForms
             this.toolStripSeparator2,
             this.miExit});
             this.miFile.Name = "miFile";
-            this.miFile.Size = new System.Drawing.Size(59, 24);
-            this.miFile.Text = "Файл";
+            this.miFile.Size = new System.Drawing.Size(46, 24);
+            this.miFile.Text = "File";
             // 
             // miOpenFile
             // 
             this.miOpenFile.Name = "miOpenFile";
-            this.miOpenFile.Size = new System.Drawing.Size(159, 26);
-            this.miOpenFile.Text = "Открыть...";
+            this.miOpenFile.Size = new System.Drawing.Size(137, 26);
+            this.miOpenFile.Text = "Open...";
             this.miOpenFile.Click += new System.EventHandler(this.miOpenFile_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(156, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(134, 6);
             // 
             // miExit
             // 
             this.miExit.Name = "miExit";
-            this.miExit.Size = new System.Drawing.Size(159, 26);
-            this.miExit.Text = "Выход";
+            this.miExit.Size = new System.Drawing.Size(137, 26);
+            this.miExit.Text = "Exit";
             this.miExit.Click += new System.EventHandler(this.miExit_Click);
             // 
             // miHelp
@@ -90,21 +90,21 @@ namespace OpenTK_STL_WinForms
             this.miHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.miAbout});
             this.miHelp.Name = "miHelp";
-            this.miHelp.Size = new System.Drawing.Size(81, 24);
-            this.miHelp.Text = "Справка";
+            this.miHelp.Size = new System.Drawing.Size(55, 24);
+            this.miHelp.Text = "Help";
             // 
             // miAbout
             // 
             this.miAbout.Name = "miAbout";
-            this.miAbout.Size = new System.Drawing.Size(187, 26);
-            this.miAbout.Text = "О программе";
+            this.miAbout.Size = new System.Drawing.Size(142, 26);
+            this.miAbout.Text = "About...";
             this.miAbout.Click += new System.EventHandler(this.miAbout_Click);
             // 
             // openFileDialogSTL
             // 
-            this.openFileDialogSTL.Filter = "\"stl файлы (*.stl)|*.stl|Все файлы (*.*)|*.*\"";
+            this.openFileDialogSTL.Filter = "stl files (*.stl)|*.stl|All (*.*)|*.*";
             this.openFileDialogSTL.ShowReadOnly = true;
-            this.openFileDialogSTL.Title = "Открыть STL-файл...";
+            this.openFileDialogSTL.Title = "Open STL file...";
             // 
             // glControl
             // 
