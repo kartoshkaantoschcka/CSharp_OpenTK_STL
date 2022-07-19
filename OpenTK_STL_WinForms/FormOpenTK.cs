@@ -42,7 +42,7 @@ namespace OpenTK_STL_WinForms
 
         private void miAbout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Подгорнов Д.А. (2022)\nD.Podgornov@mail.ru", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("kartoshka.antoschcka@yandex.ru", "О программе", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void glControl_Load(object sender, EventArgs e)
