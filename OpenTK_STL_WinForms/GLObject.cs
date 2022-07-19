@@ -24,7 +24,7 @@ namespace OpenTK_STL_WinForms
         public float angleZ = 0;
         public float transX = 0;
         public float transY = 0;
-
+        public float scale  = 1;
         public float processLoadingFile 
         {
             get => stlObject._processLoading;
@@ -90,8 +90,9 @@ namespace OpenTK_STL_WinForms
             GL.BindVertexArray(_vaoModel);
 
             _shader.Use();
-            matrixModel = Matrix4.CreateTranslation(transX, transY, -minZ);
-            matrixView  = Matrix4.CreateFromAxisAngle(new Vector3(0, 0, 1), angleZ) *
+            matrixModel = Matrix4.CreateTranslation(transX, transY, -minZ) *
+                            Matrix4.CreateScale(scale);
+            matrixView = Matrix4.CreateFromAxisAngle(new Vector3(0, 0, 1), angleZ) *
                             Matrix4.CreateFromAxisAngle(new Vector3(1, 0, 0), -angleX) *
                             Matrix4.CreateTranslation(0, 0, -2.0f);
 

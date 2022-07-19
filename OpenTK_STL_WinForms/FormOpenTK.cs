@@ -50,6 +50,8 @@ namespace OpenTK_STL_WinForms
             glControl.Resize += glControl_Resize;
             glControl.Paint += glControl_Paint;
 
+            glControl.MouseWheel += glControl_MouseWheel;
+
             _timer = new Timer();
             _timer.Tick += (sender, e) =>
             {
@@ -104,6 +106,7 @@ namespace OpenTK_STL_WinForms
             {
                 stlObject.angleX = coordObject.angleX;
                 stlObject.angleZ = coordObject.angleZ;
+                stlObject.scale  = coordObject.scale;
                 stlObject.RenderObjectGL();
 
                 statusBarProgress.Value = (int)Math.Round(stlObject.processLoadingFile * 100.0f);
@@ -164,6 +167,12 @@ namespace OpenTK_STL_WinForms
                 _firstMoveRight = true;
             }
 
+        }
+
+        private void glControl_MouseWheel(object sender, MouseEventArgs e)
+        {
+            coordObject.scale = stlObject.scale + (e.Delta * 0.0005f);
+            stlObject.scale = coordObject.scale;
         }
     }
 }

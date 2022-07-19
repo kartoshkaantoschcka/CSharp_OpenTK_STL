@@ -1,6 +1,8 @@
-﻿using System;
+﻿using OpenTK.Mathematics;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 
 namespace OpenTK_STL_WinForms
@@ -74,7 +76,15 @@ namespace OpenTK_STL_WinForms
 
                 numOfMesh = System.BitConverter.ToInt32(temp, 0);
 
-                byteIndex = 84;
+                byteIndex = 83;
+
+                byte[] bt = new byte[4];
+
+                float getval()
+                {
+                    for (int r = 0; r < 4; r++) bt[r] = fileBytes[++byteIndex];
+                    return BitConverter.ToSingle(bt, 0);
+                };
 
                 for (i = 0; i < numOfMesh; i++)
                 {
@@ -84,43 +94,26 @@ namespace OpenTK_STL_WinForms
 
                     try
                     {
-                        newMesh.norm[0].X = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.norm[0].Y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.norm[0].Z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
+                        for (int vr = 0; vr < 4; vr++)
+                        {
+                            if(vr == 0)
+                            {
+                                newMesh.norm[vr] = new Vector3(getval(), getval(), getval());
+                                newMesh.norm[1] = newMesh.norm[0];
+                                newMesh.norm[2] = newMesh.norm[0];
+                            }
+                            else
+                            {
+                                newMesh.vert[vr - 1] = new Vector3(getval(), getval(), getval());
+                            }
+                        }
 
-                        newMesh.norm[1] = newMesh.norm[0];
-                        newMesh.norm[2] = newMesh.norm[0];
-
-                        newMesh.vert[0].X = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert[0].Y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert[0].Z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-
-                        newMesh.vert[1].X = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert[1].Y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert[1].Z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-
-                        newMesh.vert[2].X = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert[2].Y = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-                        newMesh.vert[2].Z = System.BitConverter.ToSingle(new byte[] { fileBytes[byteIndex], fileBytes[byteIndex + 1], fileBytes[byteIndex + 2], fileBytes[byteIndex + 3] }, 0);
-                        byteIndex += 4;
-
-                        max_X = Math.Max(max_X, Math.Max(Math.Max(newMesh.vert[0].X, newMesh.vert[1].X), newMesh.vert[2].X));
-                        min_X = Math.Min(min_X, Math.Min(Math.Min(newMesh.vert[0].X, newMesh.vert[1].X), newMesh.vert[2].X));
-                        max_Y = Math.Max(max_Y, Math.Max(Math.Max(newMesh.vert[0].Y, newMesh.vert[1].Y), newMesh.vert[2].Y));
-                        min_Y = Math.Min(min_Y, Math.Min(Math.Min(newMesh.vert[0].Y, newMesh.vert[1].Y), newMesh.vert[2].Y));
-                        max_Z = Math.Max(max_Z, Math.Max(Math.Max(newMesh.vert[0].Z, newMesh.vert[1].Z), newMesh.vert[2].Z));
-                        min_Z = Math.Min(min_Z, Math.Min(Math.Min(newMesh.vert[0].Z, newMesh.vert[1].Z), newMesh.vert[2].Z));
+                        max_X = (new List<float>() { max_X, newMesh.vert[0].X, newMesh.vert[1].X, newMesh.vert[2].X }).Max();
+                        min_X = (new List<float>() { min_X, newMesh.vert[0].X, newMesh.vert[1].X, newMesh.vert[2].X }).Min();
+                        max_Y = (new List<float>() { max_Y, newMesh.vert[0].Y, newMesh.vert[1].Y, newMesh.vert[2].Y }).Max();
+                        min_Y = (new List<float>() { min_Y, newMesh.vert[0].Y, newMesh.vert[1].Y, newMesh.vert[2].Y }).Min();
+                        max_Z = (new List<float>() { max_Z, newMesh.vert[0].Z, newMesh.vert[1].Z, newMesh.vert[2].Z }).Max();
+                        min_Z = (new List<float>() { min_Z, newMesh.vert[0].Z, newMesh.vert[1].Z, newMesh.vert[2].Z }).Min();
 
                         byteIndex += 2;
                     }
