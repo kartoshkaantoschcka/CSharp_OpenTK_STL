@@ -174,5 +174,11 @@ namespace OpenTK_STL_WinForms
             coordObject.scale = stlObject.scale + (e.Delta * 0.0005f);
             stlObject.scale = coordObject.scale;
         }
+
+        private void FormOpenTK_Load(object sender, EventArgs e)
+        {
+            openFileDialogSTL.InitialDirectory = coordObject.pathApp + "STL\\";
+            stlObject = new GLObject(openFileDialogSTL.InitialDirectory + "stl_1.stl");
+        }
     }
 }

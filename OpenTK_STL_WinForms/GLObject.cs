@@ -32,7 +32,7 @@ namespace OpenTK_STL_WinForms
 
         public float minZ = 0;
 
-        string pathApp = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\";
+        public string pathApp = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\";
 
         public Vector2 _WidthHeigh = new Vector2(800, 600);
 

@@ -151,6 +151,7 @@ namespace OpenTK_STL_WinForms
             this.Name = "FormOpenTK";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "STL";
+            this.Load += new System.EventHandler(this.FormOpenTK_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusBar.ResumeLayout(false);
